@@ -190,6 +190,10 @@
 .customize-howMany {
     width: 50px;
 }
+
+#hard-pity p {
+    margin-left: 2%;
+}
 /* Customization Options END */
 
 /* Box */

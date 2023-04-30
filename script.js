@@ -146,17 +146,38 @@ function rollForUnit() {
         });
     }
 
-    // pick rarity based on chance
-    var randomRarity = Math.random() * 100;
-    var currentRarityChance = 0;
-    var rarityIndex = -1;
-    for (var i = 0; i < rarityData.length; i++) {
-        currentRarityChance += parseFloat(rarityData[i].chance)
-        if (currentRarityChance > randomRarity) {
-            rarityIndex = i;
-            break;
-        }
 
+    var pitySelector = document.getElementById("pity-selector");
+    var selectedRarityIndex = pitySelector.selectedIndex;
+    //var selectedRarity = pitySelector.options[pitySelector.selectedIndex].text;
+    var hardPity = document.getElementById("hardPity-amount").value;
+    if (hardPity === '') {
+        hardPity = Infinity;
+    }
+    var pityCheckbox = document.getElementById("hardPity-checkbox");
+    
+    if (pityCheckbox.checked === true) {
+        pityCount += 1;
+    }
+
+    if (pityCount >= hardPity && selectedRarityIndex != -1) {
+        pityCount = 0;
+
+        var rarityIndex = selectedRarityIndex;
+
+    } else {
+        // pick rarity based on chance
+        var randomRarity = Math.random() * 100;
+        var currentRarityChance = 0;
+        var rarityIndex = -1;
+        for (var i = 0; i < rarityData.length; i++) {
+            currentRarityChance += parseFloat(rarityData[i].chance)
+            if (currentRarityChance > randomRarity) {
+                rarityIndex = i;
+                break;
+            }
+
+        }
     }
 
     if (rarityIndex != -1) {
@@ -178,6 +199,7 @@ function rollForUnit() {
         }
 
         if (unitIndex != -1) {
+            pityCount = 0;
             // add unit to unit box
             var obtained = unitsOfRarity[unitIndex];
             return obtained;

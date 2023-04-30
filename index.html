@@ -72,10 +72,12 @@
         </div>
         <div class="content" id="options-box">
             <div class="new-content" id="hard-pity">
-                <p class="customize-input">Hard Pity</p>
-                <select onfocus="refreshRarities(this)" class="customize-input customize-rarity" id="pity-selector">
+                <p>Hard Pity</p>
+                <select class="customize-input customize-rarity" id="pity-selector" onfocus="refreshRarities(this)">
                 </select>
                 <input class="customize-input customize-howMany" id="hardPity-amount" placeholder="When?">
+                <p>Active?</p>
+                <input class="customize-input" id="hardPity-checkbox" type="checkbox">
                 <button class="delete-button" onclick="resetPity()">Reset Pity</button>
             </div>          
         </div>
