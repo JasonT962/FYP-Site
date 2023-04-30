@@ -54,23 +54,7 @@ function addUnit(button) {
     newDiv.appendChild(nameInput);
 
     // create rarity dropdown
-    var rarityDropdown = document.createElement("select");
-    rarityDropdown.classList.add("unit-input", "unit-rarity");
-
-    // get all rarity names from the rarity box
-    var rarityNames = [];
-    var rarities = document.querySelectorAll(".rarity-name");
-    for (var i = 0; i < rarities.length; i++) {
-      rarityNames.push(rarities[i].value);
-    }
-  
-    // add rarity options to dropdown
-    for (var i = 0; i < rarityNames.length; i++) {
-      var option = document.createElement("option");
-      option.text = rarityNames[i];
-      rarityDropdown.add(option);
-    }
-    newDiv.appendChild(rarityDropdown);
+    newDiv.innerHTML += "<select class='unit-input unit-rarity' onfocus=refreshRarities(this)></select>"
   
     // create chance input
     var chanceInput = document.createElement("input");
@@ -270,6 +254,24 @@ function updateStats() {
     }
 }
 
+function refreshRarities(dropdown) {
+    dropdown.innerHTML = '';
+
+    // get all rarity names from the rarity box
+    var rarityNames = [];
+    var rarities = document.querySelectorAll(".rarity-name");
+    for (var i = 0; i < rarities.length; i++) {
+      rarityNames.push(rarities[i].value);
+    }
+  
+    // add rarity options to dropdown
+    for (var i = 0; i < rarityNames.length; i++) {
+      var option = document.createElement("option");
+      option.text = rarityNames[i];
+      dropdown.add(option);
+    }
+}
+
 function resetSummons() {
     inventory = [];
     summonsDone = 0;
@@ -278,4 +280,9 @@ function resetSummons() {
 
     updateStats();
     updateBox();
+}
+
+function resetPity() {
+    pityCount = 0;
+    updateStats();
 }

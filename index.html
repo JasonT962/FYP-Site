@@ -42,7 +42,7 @@
         <input id="summon-amount" value="10">
     </div>
 
-    <!-- Rarity and Units expandable boxes -->
+    <!-- Rarity box -->
     <div class="container">
         <div class="header">
             <button class="toggle-button" onclick="toggle(this)">+</button>
@@ -53,6 +53,7 @@
         </div>
     </div>
 
+    <!-- Units / Items box -->
     <div class="container">
         <div class="header">
             <button class="toggle-button" onclick="toggle(this)">+</button>
@@ -63,6 +64,24 @@
         </div>
     </div>
 
+    <!-- Customization Options box -->
+    <div class="container">
+        <div class="header">
+            <button class="toggle-button" onclick="toggle(this)">+</button>
+            <span class="container-text">Customization Options</span>
+        </div>
+        <div class="content" id="options-box">
+            <div class="new-content" id="hard-pity">
+                <p class="customize-input">Hard Pity</p>
+                <select onfocus="refreshRarities(this)" class="customize-input customize-rarity" id="pity-selector">
+                </select>
+                <input class="customize-input customize-howMany" id="hardPity-amount" placeholder="When?">
+                <button class="delete-button" onclick="resetPity()">Reset Pity</button>
+            </div>          
+        </div>
+    </div>
+
+    <!-- Expandable boxes on the right side of the page --> 
     <div class="right-side">
         <!-- Statistics -->
         <div class="container" id="statistics">

@@ -178,6 +178,20 @@
 }
 /* Units / Items END */
 
+/* Customization Options */
+.customize-input {
+    margin: 10px;
+}
+
+.customize-rarity {
+    width: 100px;
+}
+
+.customize-howMany {
+    width: 50px;
+}
+/* Customization Options END */
+
 /* Box */
 .box-title {
     margin-left: 10px;
