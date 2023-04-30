@@ -89,7 +89,9 @@ function singleSummon() {
     var difference = currency.value - cost.value;
     if (difference >= 0) {
         var obtained = rollForUnit()
-        addToBox(obtained)
+        if (obtained != null) {
+            addToBox(obtained)
+        }
 
         summonsDone += 1;
         currencyUsed += parseFloat(cost.value);
@@ -125,6 +127,9 @@ function rollForUnit() {
         var name = unitNames[i].value;
         var rarity = unitRarities[i].value;
         var chance = unitChances[i].value;
+        if (isNaN(parseFloat(chance))) {
+            chance = 0;
+        }
         unitData.push({
             name: name,
             rarity: rarity,
@@ -139,6 +144,9 @@ function rollForUnit() {
     for (var i = 0; i < rarityNames.length; i++) {
         var name = rarityNames[i].value;
         var chance = rarityChances[i].value;
+        if (isNaN(parseFloat(chance))) {
+            chance = 0;
+        }
         rarityData.push({
             name: name,
             chance: chance
@@ -146,45 +154,51 @@ function rollForUnit() {
     }
 
     // pick rarity based on chance
-    var totalRarityChance = 0;
-    for (var i = 0; i < rarityData.length; i++) {
-        totalRarityChance += parseFloat(rarityData[i].chance);
-    }
-    var randomRarity = Math.random() * totalRarityChance;
-    var rarityIndex = 0;
+    var randomRarity = Math.random() * 100;
     var currentRarityChance = 0;
-    while (randomRarity > currentRarityChance + parseFloat(rarityData[rarityIndex].chance)) {
-        currentRarityChance += parseFloat(rarityData[rarityIndex].chance);
-        rarityIndex++;
+    var rarityIndex = -1;
+    for (var i = 0; i < rarityData.length; i++) {
+        currentRarityChance += parseFloat(rarityData[i].chance)
+        if (currentRarityChance > randomRarity) {
+            rarityIndex = i;
+            break;
+        }
+
     }
 
-    // get all units of the chosen rarity
-    var unitsOfRarity = unitData.filter(function(unit) {
-        return unit.rarity === rarityData[rarityIndex].name;
-    });
+    if (rarityIndex != -1) {
+        // get all units of the chosen rarity
+        var unitsOfRarity = unitData.filter(function(unit) {
+            return unit.rarity === rarityData[rarityIndex].name;
+        });
 
-    // pick unit based on chance
-    var totalUnitChance = 0;
-    for (var i = 0; i < unitsOfRarity.length; i++) {
-        totalUnitChance += parseFloat(unitsOfRarity[i].chance);
-    }
-    var randomUnit = Math.random() * totalUnitChance;
-    var unitIndex = 0;
-    var currentUnitChance = 0;
-    while (randomUnit > currentUnitChance + parseFloat(unitsOfRarity[unitIndex].chance)) {
-        currentUnitChance += parseFloat(unitsOfRarity[unitIndex].chance);
-        unitIndex++;
-    }
+        // pick unit based on chance
+        var randomUnit = Math.random() * 100;
+        var currentUnitChance = 0;
+        var unitIndex = -1;
+        for (var i = 0; i < unitsOfRarity.length; i++) {
+            currentUnitChance += parseFloat(unitsOfRarity[i].chance)
+            if (currentUnitChance > randomUnit) {
+                unitIndex = i;
+                break;
+            }
+        }
 
-    // add unit to unit box
-    var obtained = unitsOfRarity[unitIndex];
-    return obtained;
+        if (unitIndex != -1) {
+            // add unit to unit box
+            var obtained = unitsOfRarity[unitIndex];
+            return obtained;
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
 }
 
 function addToBox(unit) {
     var dupe = false;
     for (let units of inventory) {
-        console.log(units.name)
         if (units.name === unit.name && units.rarity === unit.rarity) {
             units.amount += 1;
             dupe = true;
@@ -199,7 +213,6 @@ function addToBox(unit) {
     }
 
     updateBox()
-    console.log(inventory)
 }
 
 // Function to refresh the box
@@ -212,7 +225,6 @@ function updateBox() {
         var newDiv = document.createElement("div");
         newDiv.classList.add("new-content");
         newDiv.innerHTML = "<p class='box-title'>"+rarityNames[i].value+"</p>";
-        console.log(rarityNames[i].value)
         for (let units of inventory) {
             if (units.rarity === rarityNames[i].value) {
                 newDiv.innerHTML += "<p class='box-units'>"+units.name+" x"+units.amount+"</p>";
