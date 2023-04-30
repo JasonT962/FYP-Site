@@ -1,0 +1,152 @@
+/* Currency and Cost */
+.currency-cost {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: -10px;
+}
+  
+.currency-cost p {
+    margin-right: 10px;
+}
+
+.currency-cost input {
+    float: right;
+    border: 2px solid black;
+}
+/* Currency and Cost END */
+
+/* Summon Screen */
+.summon-screen {
+    border: 1px solid black;
+    height: 300px;
+    width: 700px;
+    margin-left: 5%;
+}
+/* Summon Screen END */
+
+/* Summon */
+#summon-buttons {
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+#single-summon {
+    margin-right: 10%;
+}
+
+#summon-amount {
+    width: 50px
+}
+/* Summon END */
+
+/* Expandable Containers */
+.container {
+    border: 1px solid black;
+    width: 500px;
+    margin-bottom: 1%;
+    margin-left: 10%;
+}
+  
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+  
+.toggle-button {
+    font-size: 20px;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 0px solid black;
+    width: 30px;
+}
+  
+.toggle-button.active {
+    content: "-";
+}
+
+.container-text {
+    display: inline-block;
+    margin-left: 10px;
+    line-height: 30px;
+}
+
+.content {
+    display: none;
+    border-top: 1px solid black
+}
+
+.add-button {
+    display: block;
+    margin: 1% auto;
+    font-size: 100%;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.new-content {
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.delete-button {
+    margin-left: auto;
+    margin-right: 3%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+/* Expandable Containers END */
+
+/* Rarities */
+.rarity-input {
+    margin: 10px;
+}
+
+.rarity-chance {
+    width: 50px;
+    text-align: center;
+}
+/* Rarities END */
+
+/* Units / Items */
+.unit-input {
+    margin: 10px;
+}
+
+.unit-chance {
+    width: 50px;
+    text-align: center;
+}
+
+.unit-rarity {
+    width: 100px;
+}
+/* Units / Items END */
+
+/* Box */
+.box-title {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid black;
+}
+
+.box-units {
+    margin-right: 10px;
+}
+/* Box END */
+
+/* Statistics */
+#statistics {
+    margin-bottom: 5%;
+}
+/* Statistics End */
+
+.right-side {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}

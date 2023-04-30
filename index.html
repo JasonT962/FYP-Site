@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summon Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <!-- Elements for the currency and summon cost -->
+    <div class="currency-cost">
+        <p>Currency</p>
+        <input id="currency" type="text" value="5000">
+    </div>
+    <div class="currency-cost">
+        <p>Single Summon Cost</p>
+        <input id="summon-cost" type="text" value="10">
+    </div>
+
+    <!-- Summon screen and summon buttons -->
+    <div class="summon-screen">
+        <p>test</p>
+    </div>
+
+    <div id="summon-buttons">
+        <button id="single-summon" onclick="singleSummon()">Single Summon</button>
+        <button id="multi-summon" onclick="multiSummon()">Summon x</button>
+        <input id="summon-amount" value="10">
+    </div>
+
+    <!-- Rarity and Units expandable boxes -->
+    <div class="container">
+        <div class="header">
+            <button class="toggle-button" onclick="toggle(this)">+</button>
+            <span class="container-text">Rarities</span>
+        </div>
+        <div class="content">
+            <button class="add-button" onclick="addRarity(this)">+</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <button class="toggle-button" onclick="toggle(this)">+</button>
+            <span class="container-text">Units / Items</span>
+        </div>
+        <div class="content">
+            <button class="add-button" onclick="addUnit(this)">+</button>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <!-- Statistics -->
+        <div class="container" id="statistics">
+            <div class="header">
+                <button class="toggle-button" onclick="toggle(this)">+</button>
+                <span class="container-text">Statistics</span>
+            </div>
+            <div class="content" id="stats-box">
+                <p id="stats-summon">Summons: 0</p>
+                <p id="stats-currency">Currency Used: 0</p>
+                <p id="stats-pity">Pity Count: 0</p>
+                <p></p>
+                <p id="stats-rarity">Rarities Pulled:</p>
+            </div>
+        </div>
+
+        <!-- Box -->
+        <div class="container" id="box">
+            <div class="header">
+                <button class="toggle-button" onclick="toggle(this)">+</button>
+                <span class="container-text">Box</span>
+            </div>
+            <div class="content" id="unit-box">
+                <p>Units received here</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
