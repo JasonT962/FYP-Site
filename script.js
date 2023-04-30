@@ -349,3 +349,59 @@ function updateScreen() {
     "<p>You got:</p>" +
     "<p>"+summonText+"</p";
 }
+
+function importSettings() {
+
+}
+
+function exportSettings() {
+    var fileName = "Settings.txt";
+
+
+    // Get data
+    var final = "Rarities"+"\n";
+    // get all rarity data
+    var rarityNames = document.querySelectorAll(".rarity-name");
+    var rarityChances = document.querySelectorAll(".rarity-chance");
+    for (var i = 0; i < rarityNames.length; i++) {
+        var name = rarityNames[i].value;
+        var chance = rarityChances[i].value;
+        final += name+":"+chance+"\n";
+    }
+    
+    final += "Units"+"\n";
+    // get all unit data
+    var unitNames = document.querySelectorAll(".unit-name");
+    var unitRarities = document.querySelectorAll(".unit-rarity");
+    var unitChances = document.querySelectorAll(".unit-chance");
+    for (var i = 0; i < unitNames.length; i++) {
+        var name = unitNames[i].value;
+        var rarity = unitRarities[i].value;
+        var chance = unitChances[i].value;
+        final += name+":"+rarity+":"+chance+"\n";
+    }
+
+    final += "Pity"+"\n";
+    // Get customization options data
+    var selectedPity = "";
+    var pitySelector = document.getElementById("pity-selector");
+    var selectedRarityIndex = pitySelector.selectedIndex;
+    if (selectedRarityIndex != -1) {
+        selectedPity = pitySelector.options[selectedRarityIndex].text;
+    }
+    var pityAmount = document.getElementById("hardPity-amount").value;
+    var pityCheckbox = document.getElementById("hardPity-checkbox").checked;
+
+    final += selectedPity+":"+pityAmount+":"+pityCheckbox+"\n";
+    // End of getting data
+
+    // Write to file and download
+    var fileContent = final;
+    var myFile = new Blob([fileContent], {type: "text/plain"});
+    window.URL = window.URL || window.webkitURL;
+    var temp = document.createElement("a");
+    temp.setAttribute("href", window.URL.createObjectURL(myFile));
+    temp.setAttribute("download", fileName);
+    temp.click();
+    document.body.removeChild(temp);
+}
