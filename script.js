@@ -4,6 +4,8 @@ var summonsDone = 0;
 var currencyUsed = 0;
 var pityCount = 0;
 
+var summoned = [];
+
 document.addEventListener("DOMContentLoaded", function() {
     var buttons = document.querySelectorAll(".toggle-button");
     for (var i = 0; i < buttons.length; i++) {
@@ -77,6 +79,7 @@ function addUnit(button) {
 }
 
 function singleSummon() {
+    summoned = [];
     var currency = document.getElementById("currency");
     var cost = document.getElementById("summon-cost");
     var difference = currency.value - cost.value;
@@ -84,25 +87,41 @@ function singleSummon() {
         var obtained = rollForUnit()
         if (obtained != null) {
             addToBox(obtained)
+            summoned.push(obtained);
         }
 
         summonsDone += 1;
         currencyUsed += parseFloat(cost.value);
-        updateStats()
+        updateStats();
+        updateScreen();
 
         currency.value = difference;
     }
     else {
-        console.log("Not enough currency")
+        console.log("Not enough currency");
     }
 }
 
 function multiSummon() {
+    summoned = [];
     var currency = document.getElementById("currency");
     var cost = document.getElementById("summon-cost");
     var amount = document.getElementById("summon-amount")
     var difference = currency.value - (cost.value*amount.value);
     if (difference >= 0) {
+        for (var i = 0; i < amount.value; i++) {
+            var obtained = rollForUnit()
+            if (obtained != null) {
+                addToBox(obtained)
+                summoned.push(obtained);
+            }
+        }
+
+        summonsDone += parseFloat(amount.value);
+        currencyUsed += parseFloat(cost.value*amount.value);
+        updateStats();
+        updateScreen();
+
         currency.value = difference;
     }
     else {
@@ -307,4 +326,24 @@ function resetSummons() {
 function resetPity() {
     pityCount = 0;
     updateStats();
+}
+
+function updateScreen() {
+    var screen = document.getElementById("summon-screen");
+
+    var summonText = "";
+
+    for (var i = 0; i < summoned.length; i++) {
+        summonText += summoned[i].name + ", ";
+    }
+
+    summonText = summonText.slice(0, -2);
+
+    if (summonText === "") {
+        summonText = "Nothing";
+    }
+
+    screen.innerHTML = 
+    "<p>You got:</p>" +
+    "<p>"+summonText+"</p";
 }

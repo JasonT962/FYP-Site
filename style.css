@@ -70,11 +70,17 @@
 
 /* Summon Screen */
 .summon-screen {
+    font-size: 25px;
     border: 1px solid black;
     height: 300px;
     width: 700px;
     margin-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
+
 /* Summon Screen END */
 
 /* Summon */
