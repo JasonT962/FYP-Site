@@ -1,3 +1,55 @@
+/* Side panel */
+.sidepanel  {
+    position: fixed;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    z-index: 1;
+    background-color: white;
+    border: 1px solid black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    display: inline-block;
+}
+
+.sidepanel a {
+    padding: 8px 8px 8px 32px;
+    font-size: 25px;
+    display: block;
+    text-decoration: none;
+    color: #818181;
+    transition: 0.3s;
+}
+
+.sidepanel a:hover {
+    color: #f1f1f1;
+}
+
+.sidepanel .closebutton {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+}
+
+.sidepanel button {
+    margin-left: 25%;
+    margin-top: 20%;
+}
+
+.openbutton {
+    position: absolute;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: white;
+    color: grey;
+    padding: 10px 15px;
+    border: none;
+}
+/* Side panel END */
+
 /* Currency and Cost */
 .currency-cost {
     display: flex;
@@ -147,6 +199,6 @@
 
 .right-side {
     position: absolute;
-    top: 20%;
-    right: 10%;
+    top: 142px;
+    right: 153px;
 }

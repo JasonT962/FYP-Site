@@ -11,6 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Menu and side panel
+function openPanel() {
+    document.getElementById("sidepanel").style.width = "250px";
+}
+
+function closePanel() {
+    document.getElementById("sidepanel").style.width = "0";
+}
+
 function toggle(button) {
     var content = button.parentNode.nextElementSibling;
     content.style.display = content.style.display === "none" ? "block" : "none";

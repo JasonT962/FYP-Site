@@ -9,6 +9,18 @@
     <script src="script.js"></script>
 </head>
 <body>
+    <!-- Menu and side panel -->
+    <div class="sidepanel" id="sidepanel">
+        <a href="javascript:void(0)" class="closebutton" onclick="closePanel()">×</a>
+        <button onclick="resetSummons()">Reset Summons</button>
+        <br>
+        <button onclick="importSettings()">Import Settings</button>
+        <br>
+        <button onclick="exportSettings()">Export Settings</button>
+    </div>
+      
+    <button class="openbutton" onclick="openPanel()">☰</button>
+
     <!-- Elements for the currency and summon cost -->
     <div class="currency-cost">
         <p>Currency</p>
