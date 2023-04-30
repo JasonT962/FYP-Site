@@ -168,7 +168,6 @@ function rollForUnit() {
 
     var pitySelector = document.getElementById("pity-selector");
     var selectedRarityIndex = pitySelector.selectedIndex;
-    //var selectedRarity = pitySelector.options[pitySelector.selectedIndex].text;
     var hardPity = document.getElementById("hardPity-amount").value;
     if (hardPity === '') {
         hardPity = Infinity;
@@ -200,6 +199,10 @@ function rollForUnit() {
     }
 
     if (rarityIndex != -1) {
+        if (selectedRarityIndex === rarityIndex) {
+            pityCount = 0;
+        }
+
         // get all units of the chosen rarity
         var unitsOfRarity = unitData.filter(function(unit) {
             return unit.rarity === rarityData[rarityIndex].name;
@@ -218,7 +221,6 @@ function rollForUnit() {
         }
 
         if (unitIndex != -1) {
-            pityCount = 0;
             // add unit to unit box
             var obtained = unitsOfRarity[unitIndex];
             return obtained;
