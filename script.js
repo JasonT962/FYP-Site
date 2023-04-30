@@ -269,3 +269,13 @@ function updateStats() {
         rarityText.appendChild(newDiv);
     }
 }
+
+function resetSummons() {
+    inventory = [];
+    summonsDone = 0;
+    currencyUsed = 0;
+    pityCount = 0;
+
+    updateStats();
+    updateBox();
+}
