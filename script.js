@@ -70,9 +70,7 @@ function addUnit(button) {
     var deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-button");
     deleteButton.textContent = "Delete";
-    deleteButton.onclick = function() {
-      deleteParent(this);
-    };
+    deleteButton.setAttribute("onclick","deleteParent(this)");
     newDiv.appendChild(deleteButton);
   
     button.parentNode.insertBefore(newDiv, button);
@@ -350,10 +348,6 @@ function updateScreen() {
     "<p>"+summonText+"</p";
 }
 
-function importSettings() {
-
-}
-
 function exportSettings() {
     var fileName = "Settings.txt";
 
@@ -403,5 +397,135 @@ function exportSettings() {
     temp.setAttribute("href", window.URL.createObjectURL(myFile));
     temp.setAttribute("download", fileName);
     temp.click();
-    document.body.removeChild(temp);
+    temp.remove();
+}
+
+function importSettings() {
+    const file = document.getElementById("import").files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const text = this.result;
+
+        var lines = text.split('\n');
+
+        var i = 1;
+
+        // Create and append the elements for each line
+        var rarityBox = document.getElementById("rarity-box");
+        rarityBox.innerHTML = '<button class="add-button" id="add-rarity" onclick="addRarity(this)">+</button>';
+        var addRarityButton = document.getElementById("add-rarity");
+        while (lines[i] != "Units" && lines[i] != undefined && lines[i] != "") {
+            var sections = lines[i].split(":");
+            var newDiv = document.createElement("div");
+            newDiv.classList.add("new-content");
+
+            var rarityInput = document.createElement("input");
+            rarityInput.classList.add("rarity-input", "rarity-name");
+            rarityInput.setAttribute("placeholder", "Name");
+            rarityInput.value = sections[0];
+            newDiv.appendChild(rarityInput);
+
+            var rarityChance = document.createElement("input");
+            rarityChance.classList.add("rarity-input", "rarity-chance");
+            rarityChance.setAttribute("placeholder", "Chance");
+            rarityChance.value = sections[1];
+            newDiv.appendChild(rarityChance);
+
+            var percentSymbol = document.createElement("p");
+            percentSymbol.textContent = "%";
+            newDiv.appendChild(percentSymbol);
+
+            var deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button")
+            deleteButton.setAttribute("onclick","deleteParent(this)");
+            deleteButton.textContent = "Delete";
+            newDiv.appendChild(deleteButton);
+
+            addRarityButton.parentNode.insertBefore(newDiv, addRarityButton);
+            i++;
+        }
+        i++;
+
+        // Units / Items import
+        var unitItemsBox = document.getElementById("unit-items-box");
+        unitItemsBox.innerHTML = '<button class="add-button" id="add-unit" onclick="addUnit(this)">+</button>';
+        var addUnitButton = document.getElementById("add-unit");
+        while (lines[i] != "Pity" && lines[i] != undefined && lines[i] != "") {
+            var sections = lines[i].split(":");
+            var unitName = sections[0];
+            var unitRarity = sections[1];
+            var unitChance = sections[2];
+
+            var newDiv = document.createElement("div");
+            newDiv.classList.add("new-content");
+            
+            // create name input
+            var nameInput = document.createElement("input");
+            nameInput.classList.add("unit-input", "unit-name");
+            nameInput.setAttribute("placeholder", "Name");
+            nameInput.value = unitName;
+            newDiv.appendChild(nameInput);
+
+            // create rarity dropdown
+            var dropDown = document.createElement("select");
+            var option = document.createElement("option");
+            option.textContent = unitRarity;
+            dropDown.appendChild(option);
+            dropDown.classList.add("unit-input", "unit-rarity");
+            dropDown.setAttribute("onfocus","refreshRarities(this)");
+            newDiv.appendChild(dropDown);
+        
+            // create chance input
+            var chanceInput = document.createElement("input");
+            chanceInput.classList.add("unit-input", "unit-chance");
+            chanceInput.setAttribute("placeholder", "Chance");
+            chanceInput.value = unitChance;
+            newDiv.appendChild(chanceInput);
+
+            var percentSymbol = document.createElement("p");
+            percentSymbol.textContent = "%";
+            newDiv.appendChild(percentSymbol);
+        
+            // create delete button
+            var deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.textContent = "Delete";
+            deleteButton.setAttribute("onclick","deleteParent(this)");
+            newDiv.appendChild(deleteButton);
+        
+            addUnitButton.parentNode.insertBefore(newDiv, addUnitButton);
+            i++;
+        }
+        i++;
+        while (lines[i] != undefined && lines[i] != "") {
+            var sections = lines[i].split(":");
+            var pityRarity = sections[0];
+            var pityChance = sections[1];
+            var pityActive = sections[2];
+
+            var pitySelector = document.getElementById("pity-selector");
+            var hardPity = document.getElementById("hardPity-amount");
+            var pityCheckbox = document.getElementById("hardPity-checkbox");
+            
+            var option = document.createElement("option");
+            option.textContent = pityRarity;
+            pitySelector.appendChild(option);
+
+            hardPity.value = pityChance;
+            if (pityActive === "true") {
+                pityCheckbox.checked = true;
+            }
+            else {
+                false;
+            }
+
+            i++;
+        }
+    };
+
+    if (file) {
+        reader.readAsText(file);
+    }
 }

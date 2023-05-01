@@ -14,7 +14,10 @@
         <a href="javascript:void(0)" class="closebutton" onclick="closePanel()">×</a>
         <button onclick="resetSummons()">Reset Summons</button>
         <br>
-        <button onclick="importSettings()">Import Settings</button>
+        <input type="file" id="import" onchange="importSettings()" style="display:none;"/>
+        <button>
+            <label for="import">Import Settings</label>
+        </button>
         <br>
         <button onclick="exportSettings()">Export Settings</button>
     </div>
@@ -48,8 +51,8 @@
             <button class="toggle-button" onclick="toggle(this)">+</button>
             <span class="container-text">Rarities</span>
         </div>
-        <div class="content">
-            <button class="add-button" onclick="addRarity(this)">+</button>
+        <div class="content" id="rarity-box">
+            <button class="add-button" id="add-rarity" onclick="addRarity(this)">+</button>
         </div>
     </div>
 
@@ -59,8 +62,8 @@
             <button class="toggle-button" onclick="toggle(this)">+</button>
             <span class="container-text">Units / Items</span>
         </div>
-        <div class="content">
-            <button class="add-button" onclick="addUnit(this)">+</button>
+        <div class="content" id="unit-items-box">
+            <button class="add-button" id="add-unit" onclick="addUnit(this)">+</button>
         </div>
     </div>
 
